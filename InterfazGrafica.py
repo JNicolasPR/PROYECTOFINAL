@@ -6,6 +6,58 @@ import json
 from streamlit_lottie import st_lottie
 from PIL import Image
 
+#    "feature1": 2024,
+#    "feature2": 1,
+#    "feature3": 8497486,
+#    "feature4": 4725562,
+#    "feature5": 4025149,
+#    "feature6": 2147195,
+#    "feature7": 2721594,
+#    "feature8": 1240789,
+#    "feature9": 1315881,
+#    "feature10": 81.92,
+#    "feature11": 68.75,
+#    "feature12": 61.74,
+#    "feature13": 31.48,
+#    "feature14": 33.15,
+#    "feature15": 10226,
+#    "feature16": 320028.9,
+#    "feature17": 1.26,
+#    "feature18": 0.35,
+#    "feature19": 4.15,
+#    "feature20": 1.42,
+#    "feature21": 388.474,
+#    "feature22": 1028638,
+#    "feature23": 1165000,
+#    "feature24": 8.18569,
+#    "feature25": 0,
+#    "feature26": 10
+
+
+Val3 = 8497486
+Val4 = 4725562
+Val5 = 4025149
+Val6 = 2147195
+Val7 = 2721594
+Val8 = 1240789
+Val9 = 1315881
+Val10 = 81.92
+Val11 = 68.75
+Val12 = 61.74
+Val13 = 31.48
+Val14 = 33.15
+Val15 = 10226
+Val16 = 320028.9
+Val17 = 1.26
+Val18 = 0.35
+Val19 = 4.15
+Val20 = 1.42
+Val21 = 388.474
+Val22 = 1028638
+Val24 = 8.18569
+Val25 = 0
+Val26 = 10
+
 
 # Función para cargar animaciones Lottie desde una URL
 def load_lottieurl(url):
@@ -78,6 +130,9 @@ with st.container():
 
 with st.container():
     st.write("---")
+    st.markdown("""Si el valor del pronóstico está por encima de 10% *NO* es recomendable comprar apartamentos en ese año.
+  >Por otro lado, si el dato del pronostico es menor a 10% *SI* es recomendable la compra de apartamentos  
+  """)
 
 # Sección de configuración y preguntas en el Sidebar
 st.sidebar.title("Configuración y Preguntas")
@@ -86,19 +141,23 @@ st.sidebar.title("Configuración y Preguntas")
 Val1 = st.sidebar.number_input("Introduzca el año en el que quiere comprar la vivienda", max_value=2050, min_value=2005,
                                value=2024)
 Val2 = st.sidebar.number_input("Introduzca el trimestre en el que quiere comprar la vivienda, trimestre va desde 1 a 4",
-                               value=1)
-Val3 = st.sidebar.number_input(
-    "Introduzca el dato que le dio La Gran Encuesta Integrada de Hogares (GEIH) realizada por el Dane", value=8497486)
-Val4 = st.sidebar.number_input(
-    "Introduzca el número de personas que están disponibles para trabajar en la economía Bogotana", value=4725562)
-Val5 = st.sidebar.number_input(
-    "Introduzca la fuerza de trabajo comprende a las personas que tienen un empleo remunerado", value=4025149)
+                               max_value=4, min_value=1, value=1)
+
+Val23 = st.sidebar.number_input("""Introduzca el salario minimo actual""", value=1165000)
 
 # Checkbox para preguntas adicionales
 show_additional_questions = st.sidebar.checkbox("¿Quiere que su pronóstico sea más exacto?")
 
 if show_additional_questions:
     # Preguntas adicionales solo se muestran si el checkbox está marcado
+
+    Val3 = st.sidebar.number_input(
+        "Introduzca el dato que le dio La Gran Encuesta Integrada de Hogares (GEIH) realizada por el Dane",
+        value=8497486)
+    Val4 = st.sidebar.number_input(
+        "Introduzca el número de personas que están disponibles para trabajar en la economía Bogotana", value=4725562)
+    Val5 = st.sidebar.number_input(
+        "Introduzca la fuerza de trabajo comprende a las personas que tienen un empleo remunerado", value=4025149)
 
     Val6 = st.sidebar.number_input("""Introduzca la población fuera fuerza laboral.
       >Son aquellas que no están empleadas ni buscando activamente empleo.
@@ -119,7 +178,7 @@ if show_additional_questions:
     Val11 = st.sidebar.number_input("""Introduzca la tasa global participación.
       >La tasa global de participación es un indicador que representa el porcentaje de personas en edad de trabajar (población en edad activa) que están participando activamente en la fuerza laboral mediante la búsqueda de empleo o el empleo mismo
       """, value=68.75)
-    Val12 = st.sidebar.number_input("Introduzca la tasa de ocupación", value=61.74)
+    Val12 = st.sidebar.number_input("Introduzca la tasa de ocupación del año actual", value=61.74)
 
     Val13 = st.sidebar.number_input("""Introduzca la tasa fuerza potencial del trabajo.
       >Personas que, aunque no están empleadas en el momento, podrían incorporarse al mercado laboral si las condiciones mejoraran o si se presentaran oportunidades adecuadas.
@@ -155,11 +214,9 @@ if show_additional_questions:
     Val22 = st.sidebar.number_input("""Introduzca el valor aporte voluntario
       >Se refiere a las contribuciones adicionales que una persona realiza a su cuenta de pensiones voluntarias.
       """, value=1028638)
-    Val23 = st.sidebar.number_input("""Introduzca el salario minimo actual
-      """, value=1165000)
 
-    Val24 = st.sidebar.number_input("""Introduzca
-      >S
+    Val24 = st.sidebar.number_input("""Introduzca el porcentaje de personas desempleadas en Bogotá
+      >
       """, value=8.18569)
 
     Val25 = st.sidebar.number_input("""Introduzca la Variación vs Año anterior

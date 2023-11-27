@@ -229,7 +229,7 @@ if show_additional_questions:
 
 # Definir la función de predicción
 def get_prediction(data):
-    url = "https://127.0.0.1/predict/API/nn"
+    url = "http://127.0.0.1:5000/predict/API/nn"
     payload = json.dumps({
         "feature": {
 
